@@ -42,7 +42,6 @@ public class MyRmqClient {
 
     MyNettyClient myNettyClient = new MyNettyClient( "127.0.0.1", 50004, new Timer() );
 
-//@Bean
     public void receiveFromRmq() throws Exception {
         if(rmqChannel==null){
             rmqChannel=connectToRmq();
@@ -58,7 +57,6 @@ public class MyRmqClient {
                       myNettyClient.send(message);
                   } catch (InterruptedException e) {
                      log.info("InterruptedException e"+e);
-                      // throw new RuntimeException(e);
                   }
               };
 

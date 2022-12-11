@@ -82,7 +82,6 @@ public class MyNettyClient {
                         hubChannel = future.channel();
                         //add a listener to detect the connection lost
                         addCloseDetectListener( hubChannel );
-                       // connectionEstablished();
                     }
                 }
 
@@ -99,9 +98,6 @@ public class MyNettyClient {
             scheduleConnect( 1000 );
 
         }
-       /* finally {
-            close();
-        }*/
     }
 
     public void send(String msg) throws InterruptedException {
@@ -109,7 +105,7 @@ public class MyNettyClient {
             ByteBuf buf = hubChannel.alloc().buffer().writeBytes( msg.getBytes() );
             hubChannel.writeAndFlush( buf );
         } else {
-            close();//не помогло
+
             scheduleConnect( 1000 );
             Thread.sleep(10000);
             send(msg);
@@ -118,12 +114,7 @@ public class MyNettyClient {
 
     public void close() {
         try {
-
             hubChannel.close().sync();
-            hubChannel.closeFuture();//не помогло
-           // hubChannel.eventLoop().shutdownGracefully();
-            hubChannel.close();//не помогло
-           // bootstrap.;
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
