@@ -105,10 +105,10 @@ public class MyNettyClient {
             ByteBuf buf = hubChannel.alloc().buffer().writeBytes( msg.getBytes() );
             hubChannel.writeAndFlush( buf );
         } else {
-
-            scheduleConnect( 1000 );
-            Thread.sleep(10000);
-            send(msg);
+            log.info("Error to send");
+           // scheduleConnect( 1000 );
+           // Thread.sleep(2000);
+           // send(msg);
         }
     }
 
